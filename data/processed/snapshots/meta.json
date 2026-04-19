@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-04-19T06:37:17.959887+00:00",
+  "app": {
+    "title": "POWERGRID ER-I Intelligence Dashboard",
+    "region": "Eastern Region-I",
+    "deployment": "Vite + Vercel frontend, FastAPI + Render backend",
+    "frontend": "React + Vite + Tailwind + Tremor + Recharts + React-Leaflet",
+    "backend": "FastAPI + Render free web service",
+    "database": "Render Postgres free tier",
+    "llm": "Gemini 2.0 Flash",
+    "rag": "Qdrant Cloud free tier"
+  },
+  "filters": {
+    "states": [
+      "Bihar",
+      "Jharkhand",
+      "Odisha",
+      "Sikkim",
+      "West Bengal"
+    ],
+    "voltageLevels": [
+      132,
+      220,
+      400,
+      765
+    ],
+    "defaultDateRange": {
+      "start": "2023-01-01",
+      "end": "2024-12-31"
+    }
+  },
+  "overview": {
+    "assetCount": 33,
+    "sensorReadingCount": 578193,
+    "outageCount": 1500,
+    "corridorCount": 15,
+    "criticalAssets": 3,
+    "highRiskCorridors": 2,
+    "currentDemandMw": 9409.6,
+    "peakDllPct": 64.7
+  }
+}

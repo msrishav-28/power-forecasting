@@ -1,0 +1,466 @@
+{
+  "currentDemandMw": 9409.6,
+  "demandDeltaMw": -413.3,
+  "gridFrequencyHz": 49.709,
+  "outagesToday": 0,
+  "peakDllPct": 64.7,
+  "weather": {
+    "temperatureC": 16.5,
+    "windSpeedMs": 15.4,
+    "solarRadiationWm2": 0.0,
+    "rainfallMm": 0.44
+  },
+  "loadHistory": [
+    {
+      "date": "2024-12-18T00:00:00",
+      "actualMw": 9386.796
+    },
+    {
+      "date": "2024-12-19T00:00:00",
+      "actualMw": 9442.229
+    },
+    {
+      "date": "2024-12-20T00:00:00",
+      "actualMw": 9425.512
+    },
+    {
+      "date": "2024-12-21T00:00:00",
+      "actualMw": 8654.188
+    },
+    {
+      "date": "2024-12-22T00:00:00",
+      "actualMw": 8686.921
+    },
+    {
+      "date": "2024-12-23T00:00:00",
+      "actualMw": 9504.038
+    },
+    {
+      "date": "2024-12-24T00:00:00",
+      "actualMw": 9563.55
+    },
+    {
+      "date": "2024-12-25T00:00:00",
+      "actualMw": 9683.458
+    },
+    {
+      "date": "2024-12-26T00:00:00",
+      "actualMw": 9590.092
+    },
+    {
+      "date": "2024-12-27T00:00:00",
+      "actualMw": 9675.217
+    },
+    {
+      "date": "2024-12-28T00:00:00",
+      "actualMw": 8864.817
+    },
+    {
+      "date": "2024-12-29T00:00:00",
+      "actualMw": 8755.279
+    },
+    {
+      "date": "2024-12-30T00:00:00",
+      "actualMw": 9840.05
+    },
+    {
+      "date": "2024-12-31T00:00:00",
+      "actualMw": 9409.6
+    }
+  ],
+  "loadForecast": [
+    {
+      "date": "2025-01-01T00:00:00",
+      "forecastMw": 9317.2,
+      "lowerMw": 8851.3,
+      "upperMw": 9783.1
+    },
+    {
+      "date": "2025-01-02T00:00:00",
+      "forecastMw": 9324.9,
+      "lowerMw": 8858.6,
+      "upperMw": 9791.1
+    },
+    {
+      "date": "2025-01-03T00:00:00",
+      "forecastMw": 9378.5,
+      "lowerMw": 8909.6,
+      "upperMw": 9847.4
+    },
+    {
+      "date": "2025-01-04T00:00:00",
+      "forecastMw": 8612.8,
+      "lowerMw": 8182.1,
+      "upperMw": 9043.4
+    },
+    {
+      "date": "2025-01-05T00:00:00",
+      "forecastMw": 8608.7,
+      "lowerMw": 8178.3,
+      "upperMw": 9039.2
+    },
+    {
+      "date": "2025-01-06T00:00:00",
+      "forecastMw": 9574.8,
+      "lowerMw": 9096.0,
+      "upperMw": 10053.5
+    },
+    {
+      "date": "2025-01-07T00:00:00",
+      "forecastMw": 9496.3,
+      "lowerMw": 9021.5,
+      "upperMw": 9971.1
+    }
+  ],
+  "outageFeed": [
+    {
+      "timestamp": "2024-12-30T23:00:00",
+      "lineId": "TL-034",
+      "state": "Jharkhand",
+      "rootCause": "Lightning",
+      "durationHours": 2.5,
+      "voltageKv": 220,
+      "confidence": 0.74
+    },
+    {
+      "timestamp": "2024-12-28T01:00:00",
+      "lineId": "TL-002",
+      "state": "Odisha",
+      "rootCause": "Equipment Failure",
+      "durationHours": 16.5,
+      "voltageKv": 400,
+      "confidence": 0.73
+    },
+    {
+      "timestamp": "2024-12-27T21:00:00",
+      "lineId": "TL-036",
+      "state": "Jharkhand",
+      "rootCause": "Overloading",
+      "durationHours": 0.2,
+      "voltageKv": 400,
+      "confidence": 0.69
+    },
+    {
+      "timestamp": "2024-12-27T13:00:00",
+      "lineId": "TL-034",
+      "state": "Bihar",
+      "rootCause": "Tree Contact",
+      "durationHours": 0.9,
+      "voltageKv": 765,
+      "confidence": 0.68
+    },
+    {
+      "timestamp": "2024-12-25T19:00:00",
+      "lineId": "TL-020",
+      "state": "Odisha",
+      "rootCause": "Equipment Failure",
+      "durationHours": 1.4,
+      "voltageKv": 220,
+      "confidence": 0.84
+    },
+    {
+      "timestamp": "2024-12-25T15:00:00",
+      "lineId": "TL-043",
+      "state": "Bihar",
+      "rootCause": "Lightning",
+      "durationHours": 0.9,
+      "voltageKv": 765,
+      "confidence": 0.68
+    },
+    {
+      "timestamp": "2024-12-25T06:00:00",
+      "lineId": "TL-043",
+      "state": "Bihar",
+      "rootCause": "Overloading",
+      "durationHours": 1.3,
+      "voltageKv": 400,
+      "confidence": 0.75
+    },
+    {
+      "timestamp": "2024-12-25T01:00:00",
+      "lineId": "TL-031",
+      "state": "Jharkhand",
+      "rootCause": "Equipment Failure",
+      "durationHours": 3.6,
+      "voltageKv": 400,
+      "confidence": 0.74
+    },
+    {
+      "timestamp": "2024-12-24T23:00:00",
+      "lineId": "TL-040",
+      "state": "Sikkim",
+      "rootCause": "Equipment Failure",
+      "durationHours": 4.4,
+      "voltageKv": 765,
+      "confidence": 0.85
+    },
+    {
+      "timestamp": "2024-12-24T20:00:00",
+      "lineId": "TL-001",
+      "state": "Sikkim",
+      "rootCause": "Equipment Failure",
+      "durationHours": 25.3,
+      "voltageKv": 765,
+      "confidence": 0.77
+    }
+  ],
+  "causeDistribution": [
+    {
+      "cause": "Lightning",
+      "count": 326
+    },
+    {
+      "cause": "Tree Contact",
+      "count": 236
+    },
+    {
+      "cause": "Equipment Failure",
+      "count": 390
+    },
+    {
+      "cause": "Bird/Animal",
+      "count": 104
+    },
+    {
+      "cause": "Overloading",
+      "count": 221
+    },
+    {
+      "cause": "Human Error",
+      "count": 102
+    },
+    {
+      "cause": "Unknown",
+      "count": 121
+    }
+  ],
+  "failureHeatmap": [
+    {
+      "rootCause": "Bird/Animal",
+      "ageGroup": "0-5y",
+      "count": 20,
+      "ratio": 0.126
+    },
+    {
+      "rootCause": "Bird/Animal",
+      "ageGroup": "5-10y",
+      "count": 23,
+      "ratio": 0.145
+    },
+    {
+      "rootCause": "Bird/Animal",
+      "ageGroup": "10-15y",
+      "count": 18,
+      "ratio": 0.113
+    },
+    {
+      "rootCause": "Bird/Animal",
+      "ageGroup": "15-20y",
+      "count": 13,
+      "ratio": 0.082
+    },
+    {
+      "rootCause": "Bird/Animal",
+      "ageGroup": "20y+",
+      "count": 30,
+      "ratio": 0.189
+    },
+    {
+      "rootCause": "Equipment Failure",
+      "ageGroup": "0-5y",
+      "count": 47,
+      "ratio": 0.296
+    },
+    {
+      "rootCause": "Equipment Failure",
+      "ageGroup": "5-10y",
+      "count": 56,
+      "ratio": 0.352
+    },
+    {
+      "rootCause": "Equipment Failure",
+      "ageGroup": "10-15y",
+      "count": 73,
+      "ratio": 0.459
+    },
+    {
+      "rootCause": "Equipment Failure",
+      "ageGroup": "15-20y",
+      "count": 55,
+      "ratio": 0.346
+    },
+    {
+      "rootCause": "Equipment Failure",
+      "ageGroup": "20y+",
+      "count": 159,
+      "ratio": 1.0
+    },
+    {
+      "rootCause": "Human Error",
+      "ageGroup": "0-5y",
+      "count": 15,
+      "ratio": 0.094
+    },
+    {
+      "rootCause": "Human Error",
+      "ageGroup": "5-10y",
+      "count": 15,
+      "ratio": 0.094
+    },
+    {
+      "rootCause": "Human Error",
+      "ageGroup": "10-15y",
+      "count": 13,
+      "ratio": 0.082
+    },
+    {
+      "rootCause": "Human Error",
+      "ageGroup": "15-20y",
+      "count": 22,
+      "ratio": 0.138
+    },
+    {
+      "rootCause": "Human Error",
+      "ageGroup": "20y+",
+      "count": 37,
+      "ratio": 0.233
+    },
+    {
+      "rootCause": "Lightning",
+      "ageGroup": "0-5y",
+      "count": 49,
+      "ratio": 0.308
+    },
+    {
+      "rootCause": "Lightning",
+      "ageGroup": "5-10y",
+      "count": 48,
+      "ratio": 0.302
+    },
+    {
+      "rootCause": "Lightning",
+      "ageGroup": "10-15y",
+      "count": 61,
+      "ratio": 0.384
+    },
+    {
+      "rootCause": "Lightning",
+      "ageGroup": "15-20y",
+      "count": 62,
+      "ratio": 0.39
+    },
+    {
+      "rootCause": "Lightning",
+      "ageGroup": "20y+",
+      "count": 106,
+      "ratio": 0.667
+    },
+    {
+      "rootCause": "Overloading",
+      "ageGroup": "0-5y",
+      "count": 27,
+      "ratio": 0.17
+    },
+    {
+      "rootCause": "Overloading",
+      "ageGroup": "5-10y",
+      "count": 33,
+      "ratio": 0.208
+    },
+    {
+      "rootCause": "Overloading",
+      "ageGroup": "10-15y",
+      "count": 39,
+      "ratio": 0.245
+    },
+    {
+      "rootCause": "Overloading",
+      "ageGroup": "15-20y",
+      "count": 39,
+      "ratio": 0.245
+    },
+    {
+      "rootCause": "Overloading",
+      "ageGroup": "20y+",
+      "count": 83,
+      "ratio": 0.522
+    },
+    {
+      "rootCause": "Tree Contact",
+      "ageGroup": "0-5y",
+      "count": 29,
+      "ratio": 0.182
+    },
+    {
+      "rootCause": "Tree Contact",
+      "ageGroup": "5-10y",
+      "count": 43,
+      "ratio": 0.27
+    },
+    {
+      "rootCause": "Tree Contact",
+      "ageGroup": "10-15y",
+      "count": 41,
+      "ratio": 0.258
+    },
+    {
+      "rootCause": "Tree Contact",
+      "ageGroup": "15-20y",
+      "count": 43,
+      "ratio": 0.27
+    },
+    {
+      "rootCause": "Tree Contact",
+      "ageGroup": "20y+",
+      "count": 80,
+      "ratio": 0.503
+    },
+    {
+      "rootCause": "Unknown",
+      "ageGroup": "0-5y",
+      "count": 18,
+      "ratio": 0.113
+    },
+    {
+      "rootCause": "Unknown",
+      "ageGroup": "5-10y",
+      "count": 20,
+      "ratio": 0.126
+    },
+    {
+      "rootCause": "Unknown",
+      "ageGroup": "10-15y",
+      "count": 19,
+      "ratio": 0.119
+    },
+    {
+      "rootCause": "Unknown",
+      "ageGroup": "15-20y",
+      "count": 18,
+      "ratio": 0.113
+    },
+    {
+      "rootCause": "Unknown",
+      "ageGroup": "20y+",
+      "count": 46,
+      "ratio": 0.289
+    }
+  ],
+  "generationMix": [
+    {
+      "source": "Thermal",
+      "mw": 6163.2,
+      "pct": 65.5
+    },
+    {
+      "source": "Hydro",
+      "mw": 1822.3,
+      "pct": 19.4
+    },
+    {
+      "source": "Renewable",
+      "mw": 2105.4,
+      "pct": 22.4
+    }
+  ]
+}

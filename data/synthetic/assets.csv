@@ -1,0 +1,34 @@
+asset_id,substation,state,capacity_mva,voltage_kv,age_years,manufacturer,fault_type,last_maintenance
+TF-001,Patna_S/S,Bihar,315,400,12,BHEL,,2022-02-24
+TF-002,Gaya_S/S,Bihar,200,220,8,ABB,aging,2023-11-12
+TF-003,Muzaffarpur_S/S,Bihar,500,765,15,Siemens,,2023-06-19
+TF-004,Bhagalpur_S/S,Bihar,160,220,20,BHEL,,2023-03-04
+TF-005,Darbhanga_S/S,Bihar,200,400,6,Crompton,,2022-11-10
+TF-006,Ranchi_S/S,Jharkhand,315,400,10,ABB,,2022-04-11
+TF-007,Jamshedpur_S/S,Jharkhand,500,765,18,BHEL,insulation_degradation,2023-01-21
+TF-008,Dhanbad_S/S,Jharkhand,200,220,14,Siemens,,2023-11-19
+TF-009,Bokaro_S/S,Jharkhand,315,400,11,Crompton,,2023-04-05
+TF-010,Hazaribagh_S/S,Jharkhand,160,220,7,ABB,,2022-12-22
+TF-011,Kolkata_North_S/S,West Bengal,500,765,22,BHEL,aging,2022-05-17
+TF-012,Kolkata_South_S/S,West Bengal,500,765,19,Siemens,,2022-12-28
+TF-013,Howrah_S/S,West Bengal,315,400,9,ABB,,2023-09-02
+TF-014,Siliguri_S/S,West Bengal,200,400,13,Crompton,insulation_degradation,2022-12-01
+TF-015,Asansol_S/S,West Bengal,315,400,16,BHEL,,2022-09-04
+TF-016,Durgapur_S/S,West Bengal,315,400,8,Siemens,,2022-10-01
+TF-017,Bhubaneswar_S/S,Odisha,315,400,5,ABB,overload,2022-07-12
+TF-018,Cuttack_S/S,Odisha,200,220,17,BHEL,,2023-10-29
+TF-019,Rourkela_S/S,Odisha,315,400,12,Crompton,,2023-05-11
+TF-020,Berhampur_S/S,Odisha,160,220,9,Siemens,overload,2023-09-13
+TF-021,Sambalpur_S/S,Odisha,200,400,14,ABB,,2022-05-20
+TF-022,Gangtok_S/S,Sikkim,100,220,4,Crompton,,2022-11-10
+TF-023,Namchi_S/S,Sikkim,50,132,6,BHEL,,2023-12-01
+TF-024,Gaya_East_S/S,Bihar,160,220,11,Siemens,,2022-11-08
+TF-025,Arrah_S/S,Bihar,200,220,7,ABB,,2022-05-16
+TF-026,Deoghar_S/S,Jharkhand,160,220,13,Crompton,,2023-08-19
+TF-027,Chirkunda_S/S,Jharkhand,100,132,9,BHEL,,2022-08-13
+TF-028,Kharagpur_S/S,West Bengal,200,220,15,Siemens,insulation_degradation,2022-10-27
+TF-029,Malda_S/S,West Bengal,160,220,18,ABB,,2022-05-26
+TF-030,Puri_S/S,Odisha,100,132,8,Crompton,aging,2023-06-24
+TF-031,Balasore_S/S,Odisha,160,220,10,BHEL,,2023-05-15
+TF-032,Rangpo_S/S,Sikkim,80,132,5,Siemens,insulation_degradation,2023-03-08
+TF-033,Gyalshing_S/S,Sikkim,60,132,7,ABB,,2023-03-07
