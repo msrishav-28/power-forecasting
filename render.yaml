@@ -9,7 +9,7 @@ services:
     name: powergrid-eri-api
     runtime: python
     rootDir: backend
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt && cd .. && python train_models_fast.py
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     plan: free
