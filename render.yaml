@@ -9,7 +9,10 @@ services:
     name: powergrid-eri-api
     runtime: python
     rootDir: backend
-    buildCommand: pip install -r requirements.txt && cd .. && python train_models_fast.py
+    # Training is best-effort: if it fails (e.g. Prophet/cmdstanpy regression),
+    # the build still succeeds and the runtime falls back to the model artifacts
+    # committed under models/. All 10 artifacts are tracked in git.
+    buildCommand: pip install -r requirements.txt && cd .. && (python train_models_fast.py || echo "[WARN] Build-time training failed; falling back to committed model artifacts in models/")
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     plan: free
