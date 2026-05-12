@@ -12,10 +12,7 @@ class Settings(BaseSettings):
     environment: str = "development"
     api_prefix: str = "/api"
     frontend_origins: list[str] = Field(
-        default_factory=lambda: [
-            "http://localhost:5173",
-            "https://your-vercel-app.vercel.app",
-        ]
+        default_factory=lambda: ["http://localhost:5173"]
     )
     database_url: str | None = None
     gemini_api_key: str | None = None

@@ -22,3 +22,24 @@ services:
         value: production
       - key: PYTHON_VERSION
         value: 3.12.3
+      # Required: comma-separated list of Vercel/custom-domain origins.
+      # Set in the Render dashboard at first deploy, e.g. https://<your-app>.vercel.app
+      - key: FRONTEND_ORIGINS
+        sync: false
+      # Optional integrations — leave blank to let the backend use graceful fallbacks.
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_MODEL
+        value: gemini-2.0-flash
+      - key: GEMINI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: QDRANT_URL
+        sync: false
+      - key: QDRANT_API_KEY
+        sync: false
+      - key: QDRANT_COLLECTION
+        value: powergrid-public-docs
+      - key: HUGGINGFACE_MODEL_REPO
+        sync: false
+      - key: LLM_CACHE_TTL_HOURS
+        value: "6"

@@ -156,17 +156,33 @@ Key variables:
 3. Add `VITE_API_BASE_URL` pointing to the Render backend
 4. Deploy
 
+Snapshots used by the dashboard live in `frontend/public/snapshots/` and are bundled at build time. If you regenerate the underlying data, run `py utils/export_dashboard_snapshot.py` and commit the refreshed snapshots before triggering a Vercel build.
+
 ### Render
 
-This repo includes a root `render.yaml` blueprint for the FastAPI service.
+This repo includes a root `render.yaml` blueprint for the FastAPI service — use it. It provisions the Postgres database, sets `DATABASE_URL` automatically, and pre-declares every env var the backend reads. The `sync: false` keys (e.g. `FRONTEND_ORIGINS`, `GEMINI_API_KEY`) are filled in via the Render dashboard at first deploy.
 
 If you configure it manually:
 
 1. Create a new Web Service
 2. Set Root Directory to `backend`
-3. Build command: `pip install -r requirements.txt`
+3. Build command: `pip install -r requirements.txt && cd .. && python train_models_fast.py`
 4. Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
 5. Attach a free Render Postgres database and set `DATABASE_URL`
+6. Set `FRONTEND_ORIGINS` to your Vercel URL (comma-separate to add custom domains)
+
+### Production environment variables
+
+| Variable | Where | Required? | Notes |
+|---|---|---|---|
+| `VITE_API_BASE_URL` | Vercel | Yes | Render service URL, e.g. `https://powergrid-eri-api.onrender.com`. Baked at build time — redeploy after changes. |
+| `DATABASE_URL` | Render | Auto | Injected from the `powergrid-db` blueprint. |
+| `FRONTEND_ORIGINS` | Render | Yes | Comma-separated list of Vercel/custom-domain origins. CORS will reject everything else. |
+| `ENVIRONMENT` | Render | Auto | Set to `production` by the blueprint. |
+| `PYTHON_VERSION` | Render | Auto | Pinned to `3.12.3` by the blueprint. |
+| `GEMINI_API_KEY` | Render | Optional | Required only for live `/api/llm/insight`. Falls back gracefully if blank. |
+| `QDRANT_URL`, `QDRANT_API_KEY` | Render | Optional | Required only for live `/api/chat/rag`. Falls back gracefully if blank. |
+| `HUGGINGFACE_MODEL_REPO` | Render | Optional | Pulls pre-trained artifacts from HF Hub instead of regenerating during build. |
 
 ## Public API
 
