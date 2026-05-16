@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 
+import { MobileNav } from '../components/layout/MobileNav'
+import { Toolbar } from '../components/layout/Toolbar'
+import { TopNav } from '../components/layout/TopNav'
 import { FilterBar } from '../components/shared/FilterBar'
 import { Sidebar } from '../components/shared/Sidebar'
-import { Topbar } from '../components/shared/Topbar'
 import { useDashboardFilters } from '../hooks/use-dashboard-filters'
 import { useMetaSnapshot } from '../hooks/use-snapshots'
 
@@ -20,21 +22,31 @@ export function DashboardLayout() {
   if (metaQuery.isLoading || !metaQuery.data) {
     return (
       <div className="grid min-h-screen place-items-center px-6">
-        <div className="rounded-[30px] bg-panel/90 px-8 py-6 text-center shadow-panel">
-          <p className="font-mono text-xs uppercase tracking-[0.34em] text-muted">Booting Dashboard</p>
-          <h1 className="mt-3 text-2xl font-semibold text-ink">Loading snapshot contracts...</h1>
+        <div className="rounded-panel border border-glassEdge bg-panel/70 px-8 py-6 text-center shadow-glass backdrop-blur-glass">
+          <p className="font-mono text-eyebrow uppercase text-muted">Booting Dashboard</p>
+          <h1 className="mt-3 text-h2 font-semibold text-ink">Loading snapshot contracts...</h1>
         </div>
       </div>
     )
   }
 
+  const meta = metaQuery.data
+
   return (
-    <div className="min-h-screen px-4 py-4 lg:px-5">
-      <div className="mx-auto flex max-w-[1880px] flex-col gap-5 xl:flex-row">
-        <Sidebar meta={metaQuery.data} />
-        <main className="min-w-0 flex-1 space-y-5">
-          <Topbar meta={metaQuery.data} />
-          <FilterBar meta={metaQuery.data} />
+    <div className="min-h-screen">
+      <TopNav
+        meta={meta}
+        leading={
+          <MobileNav>
+            {(close) => <Sidebar meta={meta} onNavigate={close} />}
+          </MobileNav>
+        }
+      />
+      <div className="mx-auto flex max-w-content gap-gutter px-4 py-gutter sm:px-6 lg:px-8 xl:gap-gutter-lg">
+        <Sidebar meta={meta} className="hidden shrink-0 lg:flex" />
+        <main className="min-w-0 flex-1 space-y-gutter">
+          <Toolbar />
+          <FilterBar meta={meta} />
           <Outlet />
         </main>
       </div>

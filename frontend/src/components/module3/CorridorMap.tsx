@@ -17,7 +17,7 @@ interface CorridorMapProps {
 
 export function CorridorMap({ segments, selectedSegmentId, onSelect }: CorridorMapProps) {
   return (
-    <div className="h-[540px] overflow-hidden rounded-[28px] border border-white/70 shadow-panel">
+    <div className="h-[540px] overflow-hidden rounded-panel border border-glassEdge shadow-glass">
       <MapContainer center={[24.3, 86.3]} zoom={7} scrollWheelZoom className="h-full w-full">
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'

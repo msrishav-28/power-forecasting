@@ -6,41 +6,44 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
   const { filters, setDateRange, setVoltageLevel, toggleState } = useDashboardFilters()
 
   return (
-    <section className="rounded-[30px] border border-white/70 bg-panel/90 p-5 shadow-panel">
+    <section className="rounded-panel border border-glassEdge bg-panel/70 p-pane shadow-glass backdrop-blur-glass">
       <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
-        <div>
-          <p className="font-mono text-xs uppercase tracking-[0.28em] text-muted">Global Filters</p>
-          <h3 className="mt-2 text-lg font-semibold text-ink">Keep all views aligned to the same operating slice</h3>
+        <div className="flex items-stretch gap-3">
+          <span aria-hidden className="w-[3px] rounded-pill bg-brand" />
+          <div>
+            <p className="font-mono text-eyebrow uppercase text-muted">Global Filters</p>
+            <h3 className="mt-1 text-h3 font-semibold text-ink">Keep all views aligned to the same operating slice</h3>
+          </div>
         </div>
-        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <label className="space-y-2">
-            <span className="text-sm font-medium text-ink">Start date</span>
+            <span className="text-small font-medium text-ink">Start date</span>
             <input
               type="date"
               value={toDateInputValue(filters.startDate)}
               onChange={(event) => setDateRange(event.target.value, filters.endDate)}
-              className="w-full rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-ink outline-none ring-0"
+              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
             />
           </label>
           <label className="space-y-2">
-            <span className="text-sm font-medium text-ink">End date</span>
+            <span className="text-small font-medium text-ink">End date</span>
             <input
               type="date"
               value={toDateInputValue(filters.endDate)}
               min={toDateInputValue(filters.startDate)}
               onChange={(event) => setDateRange(filters.startDate, event.target.value)}
-              className="w-full rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-ink outline-none ring-0"
+              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
             />
           </label>
           <label className="space-y-2">
-            <span className="text-sm font-medium text-ink">Voltage</span>
+            <span className="text-small font-medium text-ink">Voltage</span>
             <select
               value={String(filters.voltageLevel)}
               onChange={(event) => {
                 const value = event.target.value
                 setVoltageLevel(value === 'All' ? 'All' : Number(value))
               }}
-              className="w-full rounded-2xl border border-white/70 bg-white/70 px-4 py-3 text-sm text-ink outline-none ring-0"
+              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
             >
               <option value="All">All levels</option>
               {meta.filters.voltageLevels.map((voltage) => (
@@ -61,8 +64,8 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
               key={state}
               type="button"
               onClick={() => toggleState(state)}
-              className={`rounded-full px-4 py-2 text-sm transition ${
-                active ? 'bg-ink text-white shadow-lg' : 'bg-recessed/70 text-ink hover:bg-white/90'
+              className={`rounded-pill px-4 py-2 text-small transition ${
+                active ? 'bg-brand text-white shadow-glass' : 'bg-recessed/70 text-ink hover:bg-white/90'
               }`}
             >
               {state}

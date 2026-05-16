@@ -6,52 +6,68 @@ import type { MetaSnapshot } from '../../lib/contracts'
 import { formatCompact } from '../../lib/format'
 
 const navItems = [
+  { to: '/dashboard', label: 'Overview', icon: Waves, end: true },
   { to: '/dashboard/assets', label: 'Asset Health', icon: BrainCircuit },
   { to: '/dashboard/grid', label: 'Grid Operations', icon: Zap },
   { to: '/dashboard/corridors', label: 'Corridor Monitor', icon: Satellite },
 ]
 
-export function Sidebar({ meta }: { meta: MetaSnapshot }) {
+interface SidebarProps {
+  meta: MetaSnapshot
+  /** Optional className appended to the root <aside> (used to hide on mobile). */
+  className?: string
+  /** Called whenever a nav link is clicked (used by the mobile drawer to close). */
+  onNavigate?: () => void
+}
+
+export function Sidebar({ meta, className = '', onNavigate }: SidebarProps) {
   return (
-    <aside className="flex w-full max-w-[290px] flex-col gap-6 rounded-[34px] border border-white/70 bg-panel/90 p-6 shadow-panel">
+    <aside
+      aria-label="Primary navigation"
+      className={`flex w-full max-w-[290px] flex-col gap-6 rounded-rail border border-glassEdge bg-panel/70 p-6 shadow-glass backdrop-blur-glass ${className}`}
+    >
       <div className="rounded-[26px] bg-grid p-5 shadow-insetSoft">
         <div className="flex items-center gap-3">
-          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-ink text-panel shadow-panel">
+          <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand text-white shadow-glass">
             <Waves className="h-6 w-6" />
           </div>
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.32em] text-muted">POWERGRID</p>
-            <h1 className="text-xl font-semibold text-ink">ER-I Intelligence</h1>
+            <p className="font-mono text-eyebrow uppercase text-muted">POWERGRID</p>
+            <h1 className="text-h3 font-semibold text-ink">ER-I Intelligence</h1>
           </div>
         </div>
-        <p className="mt-4 text-sm leading-6 text-muted">
+        <p className="mt-4 text-small leading-6 text-muted">
           Control-room dashboard for predictive maintenance, grid operations, and corridor risk surveillance.
         </p>
       </div>
 
       <nav className="space-y-2">
-        {navItems.map(({ to, label, icon: Icon }) => (
+        {navItems.map(({ to, label, icon: Icon, end }) => (
           <NavLink
             key={to}
             to={to}
+            end={end}
+            onClick={onNavigate}
             className={({ isActive }) =>
               `flex items-center justify-between rounded-2xl px-4 py-3 transition ${
-                isActive ? 'bg-ink text-white shadow-lg' : 'bg-recessed/50 text-ink hover:bg-white/70'
+                isActive
+                  ? 'bg-brand text-white shadow-glass'
+                  : 'bg-recessed/50 text-ink hover:bg-white/70'
               }`
             }
           >
             <span className="flex items-center gap-3">
-              <Icon className="h-5 w-5" />
+              <Icon className="h-5 w-5" aria-hidden />
               {label}
             </span>
-            <Activity className="h-4 w-4 opacity-70" />
+            <Activity className="h-4 w-4 opacity-70" aria-hidden />
           </NavLink>
         ))}
       </nav>
 
-      <div className="rounded-[24px] bg-recessed/70 p-5 shadow-insetSoft">
-        <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted">Situation Board</p>
-        <div className="mt-4 space-y-3 text-sm text-ink">
+      <div className="rounded-card bg-recessed/70 p-5 shadow-insetSoft">
+        <p className="font-mono text-eyebrow uppercase text-muted">Situation Board</p>
+        <div className="mt-4 space-y-3 text-small text-ink">
           <div className="flex items-center justify-between">
             <span>Assets</span>
             <strong>{formatCompact(meta.overview.assetCount)}</strong>

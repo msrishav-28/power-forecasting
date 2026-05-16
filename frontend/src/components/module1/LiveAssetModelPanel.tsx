@@ -35,7 +35,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
 
       <div className="mt-5 grid gap-3 md:grid-cols-2">
         <Button
-          className="rounded-2xl border-0 bg-ink px-4 py-3 text-white hover:bg-slate-800"
+          className="rounded-2xl border-0 bg-brand px-4 py-3 text-white shadow-glass hover:opacity-90"
           loading={rulMutation.isPending}
           icon={Gauge}
           onClick={() => rulMutation.mutate()}
@@ -53,7 +53,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
       </div>
 
       <div className="mt-5 space-y-4">
-        <div className="rounded-[24px] bg-recessed/70 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
           {rulMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -82,7 +82,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
           )}
         </div>
 
-        <div className="rounded-[24px] bg-recessed/70 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
           {anomalyMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />

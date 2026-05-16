@@ -8,17 +8,31 @@ interface SectionCardProps extends PropsWithChildren {
   className?: string
 }
 
+/**
+ * SectionCard — glass-surfaced titled section. The 3px gradient accent bar to
+ * the left of the title is the brand signature; it appears on every section
+ * heading across the app.
+ */
 export function SectionCard({ title, eyebrow, action, className, children }: SectionCardProps) {
   return (
-    <Card className={`rounded-[28px] border-0 bg-panel/90 shadow-panel ${className || ''}`}>
-      <div className="mb-5 flex items-start justify-between gap-4">
-        <div>
-          {eyebrow ? <Text className="font-mono uppercase tracking-[0.28em] text-muted">{eyebrow}</Text> : null}
-          <h3 className="mt-2 text-lg font-semibold text-ink">{title}</h3>
+    <Card
+      className={`relative rounded-panel border border-glassEdge bg-panel/70 p-pane shadow-glass backdrop-blur-glass ${
+        className || ''
+      }`}
+    >
+      <div className="mb-6 flex items-start justify-between gap-4">
+        <div className="flex items-stretch gap-3">
+          <span aria-hidden className="w-[3px] shrink-0 rounded-pill bg-brand" />
+          <div className="min-w-0">
+            {eyebrow ? (
+              <Text className="font-mono text-eyebrow uppercase text-muted">{eyebrow}</Text>
+            ) : null}
+            <h3 className="mt-1 text-h3 font-semibold text-ink">{title}</h3>
+          </div>
         </div>
-        {action}
+        {action ? <div className="shrink-0">{action}</div> : null}
       </div>
-      {children}
+      <div className="space-y-4">{children}</div>
     </Card>
   )
 }

@@ -30,7 +30,7 @@ export function LiveCorridorModelPanel({ segment }: { segment: CorridorSegment }
       </p>
 
       <Button
-        className="mt-5 rounded-2xl border-0 bg-ink px-4 py-3 text-white hover:bg-slate-800"
+        className="mt-5 rounded-2xl border-0 bg-brand px-4 py-3 text-white shadow-glass hover:opacity-90"
         loading={riskMutation.isPending}
         icon={Radar}
         onClick={() => riskMutation.mutate()}
@@ -38,7 +38,7 @@ export function LiveCorridorModelPanel({ segment }: { segment: CorridorSegment }
         Refresh NDVI risk
       </Button>
 
-      <div className="mt-5 rounded-[24px] bg-recessed/70 p-4 shadow-insetSoft">
+      <div className="mt-5 rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
         {riskMutation.isPending ? (
           <div className="flex items-center gap-3 text-sm text-muted">
             <LoaderCircle className="h-4 w-4 animate-spin" />

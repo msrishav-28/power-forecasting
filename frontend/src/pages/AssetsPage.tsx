@@ -13,18 +13,25 @@ import {
   YAxis,
 } from 'recharts'
 
+import { ChartGradients, GlassTooltip } from '../components/charts/ChartComponents'
+import { areaGradientIds, chartAxis, chartGrid, chartPalette } from '../components/charts/ChartTheme'
+import { BentoCell } from '../components/layout/BentoCell'
+import { BentoGrid } from '../components/layout/BentoGrid'
+import { PageHeader } from '../components/layout/PageHeader'
+import { RightRail } from '../components/layout/RightRail'
 import { AssetSelector } from '../components/module1/AssetSelector'
 import { LiveAssetModelPanel } from '../components/module1/LiveAssetModelPanel'
 import { KpiCard } from '../components/shared/KpiCard'
 import { LLMInsightPanel } from '../components/shared/LLMInsightPanel'
 import { SectionCard } from '../components/shared/SectionCard'
 import { useDashboardFilters } from '../hooks/use-dashboard-filters'
-import { useAssetsSnapshot } from '../hooks/use-snapshots'
+import { useAssetsSnapshot, useMetaSnapshot } from '../hooks/use-snapshots'
 import { formatNumber, riskTone, toDateInputValue } from '../lib/format'
 
 export function AssetsPage() {
   const { filters } = useDashboardFilters()
   const assetsQuery = useAssetsSnapshot()
+  const metaQuery = useMetaSnapshot()
   const [search, setSearch] = useState('')
   const deferredSearch = useDeferredValue(search)
   const [selectedAssetId, setSelectedAssetId] = useState<string | null>(null)
@@ -65,153 +72,170 @@ export function AssetsPage() {
   })
 
   return (
-    <div className="grid gap-5 2xl:grid-cols-[320px,1.55fr,0.95fr]">
-      <AssetSelector
-        assets={filteredAssets}
-        search={search}
-        onSearchChange={setSearch}
-        selectedAssetId={activeAssetId}
-        onSelect={setSelectedAssetId}
+    <div className="space-y-gutter">
+      <PageHeader
+        eyebrow="Module 01 · Predictive maintenance"
+        title="Asset Health"
+        subtitle="Transformer fleet condition, RUL forecasts, anomaly drivers, and field-ready advisories."
+        lastUpdated={metaQuery.data?.generatedAt}
       />
 
-      <div className="space-y-5">
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-          <KpiCard
-            label="Health Index"
-            value={`${selectedAsset.healthIndex}/100`}
-            delta={`${selectedAsset.healthDelta30d} vs 30d`}
-            tone="signal"
-          />
-          <KpiCard
-            label="Estimated RUL"
-            value={`${Math.round(selectedAsset.rulDays)} days`}
-            delta={`${selectedAsset.rulBand.low}-${selectedAsset.rulBand.high} day band`}
-          />
-          <KpiCard
-            label="Anomaly Score"
-            value={selectedAsset.anomaly.score.toFixed(2)}
-            delta={`Threshold ${selectedAsset.anomaly.threshold}`}
-            tone={selectedAsset.anomaly.isDetected ? 'signal' : 'stable'}
-          />
-          <KpiCard
-            label="Latest Load"
-            value={formatNumber(selectedAsset.latestReadings.loadPct || 0, '%')}
-            delta={`${selectedAsset.voltageKv} kV class`}
-          />
-        </section>
+      <BentoGrid columns={{ base: 1, sm: 2, lg: 4 }}>
+        <KpiCard
+          label="Health Index"
+          value={`${selectedAsset.healthIndex}/100`}
+          delta={`${selectedAsset.healthDelta30d} vs 30d`}
+          tone="signal"
+        />
+        <KpiCard
+          label="Estimated RUL"
+          value={`${Math.round(selectedAsset.rulDays)} days`}
+          delta={`${selectedAsset.rulBand.low}-${selectedAsset.rulBand.high} day band`}
+        />
+        <KpiCard
+          label="Anomaly Score"
+          value={selectedAsset.anomaly.score.toFixed(2)}
+          delta={`Threshold ${selectedAsset.anomaly.threshold}`}
+          tone={selectedAsset.anomaly.isDetected ? 'signal' : 'stable'}
+        />
+        <KpiCard
+          label="Latest Load"
+          value={formatNumber(selectedAsset.latestReadings.loadPct || 0, '%')}
+          delta={`${selectedAsset.voltageKv} kV class`}
+        />
+      </BentoGrid>
 
-        <SectionCard title={`${selectedAsset.assetId} asset profile`} eyebrow="Transformer focus">
-          <div className="grid gap-5 xl:grid-cols-[1.25fr,0.9fr]">
-            <div className="rounded-[26px] bg-grid p-5 shadow-insetSoft">
-              <p className="font-mono text-xs uppercase tracking-[0.24em] text-muted">Health Trend</p>
-              <div className="mt-4 h-[320px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={healthHistory}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
-                    <XAxis dataKey="date" tick={{ fontSize: 12 }} />
-                    <YAxis domain={[20, 100]} tick={{ fontSize: 12 }} />
-                    <Tooltip />
-                    <Line type="monotone" dataKey="value" stroke="#0f766e" strokeWidth={3} dot={false} />
-                  </LineChart>
-                </ResponsiveContainer>
+      <BentoGrid columns={{ base: 1, lg: 12 }}>
+        <BentoCell colSpan={{ base: 1, lg: 4, xl: 3 }}>
+          <AssetSelector
+            assets={filteredAssets}
+            search={search}
+            onSearchChange={setSearch}
+            selectedAssetId={activeAssetId}
+            onSelect={setSelectedAssetId}
+          />
+        </BentoCell>
+
+        <BentoCell colSpan={{ base: 1, lg: 8, xl: 6 }}>
+          <SectionCard title={`${selectedAsset.assetId} asset profile`} eyebrow="Transformer focus">
+            <div className="grid gap-5 xl:grid-cols-[1.25fr,0.9fr]">
+              <div className="rounded-[26px] bg-grid p-5 shadow-insetSoft">
+                <p className="font-mono text-eyebrow uppercase text-muted">Health Trend</p>
+                <div className="mt-4 h-[320px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={healthHistory}>
+                      <ChartGradients />
+                      <CartesianGrid {...chartGrid} />
+                      <XAxis dataKey="date" {...chartAxis} />
+                      <YAxis domain={[20, 100]} {...chartAxis} />
+                      <Tooltip content={<GlassTooltip />} />
+                      <Line type="monotone" dataKey="value" stroke={chartPalette.secondary} strokeWidth={2.5} dot={false} />
+                    </LineChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
+              <div className="overflow-hidden rounded-[26px]">
+                <img
+                  src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1200&q=80"
+                  alt="Electrical transformer and substation equipment"
+                  className="h-full min-h-[320px] w-full object-cover"
+                />
               </div>
             </div>
-            <div className="overflow-hidden rounded-[26px]">
-              <img
-                src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1200&q=80"
-                alt="Electrical transformer and substation equipment"
-                className="h-full min-h-[320px] w-full object-cover"
+            <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+                <p className="text-small text-muted">Substation</p>
+                <p className="mt-2 font-semibold text-ink">{selectedAsset.substation}</p>
+              </div>
+              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+                <p className="text-small text-muted">Manufacturer</p>
+                <p className="mt-2 font-semibold text-ink">{selectedAsset.manufacturer}</p>
+              </div>
+              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+                <p className="text-small text-muted">Capacity</p>
+                <p className="mt-2 font-semibold text-ink">{selectedAsset.capacityMva} MVA</p>
+              </div>
+              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+                <p className="text-small text-muted">Status</p>
+                <p className={`mt-2 inline-flex rounded-pill px-3 py-1 text-small font-semibold ${riskTone(selectedAsset.status)}`}>
+                  {selectedAsset.status}
+                </p>
+              </div>
+            </div>
+          </SectionCard>
+        </BentoCell>
+
+        <BentoCell colSpan={{ base: 1, lg: 12, xl: 3 }}>
+          <RightRail
+            predictions={<LiveAssetModelPanel asset={selectedAsset} />}
+            copilot={
+              <LLMInsightPanel
+                scope="asset"
+                title="Asset advisory"
+                prompt="Given the transformer health, anomaly score, gas trend, and RUL, produce a field maintenance advisory."
+                context={{
+                  assetId: selectedAsset.assetId,
+                  substation: selectedAsset.substation,
+                  state: selectedAsset.state,
+                  healthIndex: selectedAsset.healthIndex,
+                  rulDays: selectedAsset.rulDays,
+                  anomalyScore: selectedAsset.anomaly.score,
+                  latestReadings: selectedAsset.latestReadings,
+                }}
               />
-            </div>
-          </div>
-          <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <div className="rounded-[22px] bg-recessed/70 p-4 shadow-insetSoft">
-              <p className="text-sm text-muted">Substation</p>
-              <p className="mt-2 font-semibold text-ink">{selectedAsset.substation}</p>
-            </div>
-            <div className="rounded-[22px] bg-recessed/70 p-4 shadow-insetSoft">
-              <p className="text-sm text-muted">Manufacturer</p>
-              <p className="mt-2 font-semibold text-ink">{selectedAsset.manufacturer}</p>
-            </div>
-            <div className="rounded-[22px] bg-recessed/70 p-4 shadow-insetSoft">
-              <p className="text-sm text-muted">Capacity</p>
-              <p className="mt-2 font-semibold text-ink">{selectedAsset.capacityMva} MVA</p>
-            </div>
-            <div className="rounded-[22px] bg-recessed/70 p-4 shadow-insetSoft">
-              <p className="text-sm text-muted">Status</p>
-              <p className={`mt-2 inline-flex rounded-full px-3 py-1 text-sm font-semibold ${riskTone(selectedAsset.status)}`}>
-                {selectedAsset.status}
-              </p>
-            </div>
-          </div>
-        </SectionCard>
+            }
+          />
+        </BentoCell>
+      </BentoGrid>
 
-        <div className="grid gap-5 xl:grid-cols-2">
-          <SectionCard title="Thermal and load stress" eyebrow="Last 7 days">
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={sensorHistory}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
-                  <XAxis dataKey="timestamp" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
-                  <Line type="monotone" dataKey="oil_temp" stroke="#ff6b35" strokeWidth={3} dot={false} />
-                  <Line type="monotone" dataKey="winding_temp" stroke="#0f766e" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="load_pct" stroke="#1d4ed8" strokeWidth={2} dot={false} />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
-          </SectionCard>
-
-          <SectionCard title="DGA warning trend" eyebrow="Last 30 days">
-            <div className="h-[300px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={gasHistory}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
-                  <XAxis dataKey="timestamp" tick={{ fontSize: 12 }} />
-                  <YAxis tick={{ fontSize: 12 }} />
-                  <Tooltip />
-                  <Area type="monotone" dataKey="h2_ppm" fill="#f97316" stroke="#f97316" fillOpacity={0.26} />
-                  <Area type="monotone" dataKey="ch4_ppm" fill="#1d4ed8" stroke="#1d4ed8" fillOpacity={0.18} />
-                  <Area type="monotone" dataKey="co_ppm" fill="#0f766e" stroke="#0f766e" fillOpacity={0.18} />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </SectionCard>
-        </div>
-
-        <SectionCard title="Anomaly drivers" eyebrow="Explainer">
-          <div className="h-[280px]">
+      <BentoGrid columns={{ base: 1, xl: 2 }}>
+        <SectionCard title="Thermal and load stress" eyebrow="Last 7 days">
+          <div className="h-[300px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={selectedAsset.anomaly.drivers}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#cbd5e1" />
-                <XAxis dataKey="feature" tick={{ fontSize: 12 }} />
-                <YAxis tick={{ fontSize: 12 }} />
-                <Tooltip />
-                <Bar dataKey="score" fill="#ff6b35" radius={[10, 10, 0, 0]} />
-              </BarChart>
+              <LineChart data={sensorHistory}>
+                <CartesianGrid {...chartGrid} />
+                <XAxis dataKey="timestamp" {...chartAxis} />
+                <YAxis {...chartAxis} />
+                <Tooltip content={<GlassTooltip />} />
+                <Line type="monotone" dataKey="oil_temp" stroke={chartPalette.warn} strokeWidth={2.5} dot={false} />
+                <Line type="monotone" dataKey="winding_temp" stroke={chartPalette.secondary} strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="load_pct" stroke={chartPalette.primary} strokeWidth={2} dot={false} />
+              </LineChart>
             </ResponsiveContainer>
           </div>
         </SectionCard>
-      </div>
 
-      <div className="space-y-4">
-        <LiveAssetModelPanel asset={selectedAsset} />
-        <LLMInsightPanel
-          scope="asset"
-          title="Asset advisory"
-          prompt="Given the transformer health, anomaly score, gas trend, and RUL, produce a field maintenance advisory."
-          context={{
-            assetId: selectedAsset.assetId,
-            substation: selectedAsset.substation,
-            state: selectedAsset.state,
-            healthIndex: selectedAsset.healthIndex,
-            rulDays: selectedAsset.rulDays,
-            anomalyScore: selectedAsset.anomaly.score,
-            latestReadings: selectedAsset.latestReadings,
-          }}
-        />
-      </div>
+        <SectionCard title="DGA warning trend" eyebrow="Last 30 days">
+          <div className="h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={gasHistory}>
+                <ChartGradients />
+                <CartesianGrid {...chartGrid} />
+                <XAxis dataKey="timestamp" {...chartAxis} />
+                <YAxis {...chartAxis} />
+                <Tooltip content={<GlassTooltip />} />
+                <Area type="monotone" dataKey="h2_ppm" stroke={chartPalette.warn} fill={`url(#${areaGradientIds.warn})`} />
+                <Area type="monotone" dataKey="ch4_ppm" stroke={chartPalette.primary} fill={`url(#${areaGradientIds.primary})`} />
+                <Area type="monotone" dataKey="co_ppm" stroke={chartPalette.secondary} fill={`url(#${areaGradientIds.secondary})`} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        </SectionCard>
+      </BentoGrid>
+
+      <SectionCard title="Anomaly drivers" eyebrow="Explainer">
+        <div className="h-[280px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={selectedAsset.anomaly.drivers}>
+              <CartesianGrid {...chartGrid} />
+              <XAxis dataKey="feature" {...chartAxis} />
+              <YAxis {...chartAxis} />
+              <Tooltip content={<GlassTooltip />} />
+              <Bar dataKey="score" fill={chartPalette.warn} radius={[10, 10, 0, 0]} />
+            </BarChart>
+          </ResponsiveContainer>
+        </div>
+      </SectionCard>
     </div>
   )
 }

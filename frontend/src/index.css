@@ -43,14 +43,34 @@ textarea {
   font: inherit;
 }
 
+/* Keyboard accessibility — visible focus ring with brand color */
+:where(button, a, [role='button'], [role='tab'], input, select, textarea):focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Softer, slimmer scrollbars */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(91, 101, 119, 0.35);
+  background: rgba(91, 101, 119, 0.25);
   border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(91, 101, 119, 0.45);
+  background-clip: padding-box;
+  border: 2px solid transparent;
 }
 
 .leaflet-container {
