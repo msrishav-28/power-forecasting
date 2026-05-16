@@ -6,13 +6,13 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
   const { filters, setDateRange, setVoltageLevel, toggleState } = useDashboardFilters()
 
   return (
-    <section className="rounded-panel border border-glassEdge bg-panel/70 p-pane shadow-glass backdrop-blur-glass">
+    <section className="rounded-panel border border-slate-200 bg-white p-6 shadow-sm">
       <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
         <div className="flex items-stretch gap-3">
-          <span aria-hidden className="w-[3px] rounded-pill bg-brand" />
+          <span aria-hidden className="w-[3px] rounded-pill bg-slate-800" />
           <div>
-            <p className="font-mono text-eyebrow uppercase text-muted">Global Filters</p>
-            <h3 className="mt-1 text-h3 font-semibold text-ink">Keep all views aligned to the same operating slice</h3>
+            <p className="font-mono text-eyebrow uppercase text-slate-500">Global Scope</p>
+            <h3 className="mt-1 text-base font-semibold text-ink">Dashboard-wide filter parameters</h3>
           </div>
         </div>
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -22,7 +22,7 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
               type="date"
               value={toDateInputValue(filters.startDate)}
               onChange={(event) => setDateRange(event.target.value, filters.endDate)}
-              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-ink outline-none focus-visible:border-slate-400"
             />
           </label>
           <label className="space-y-2">
@@ -32,7 +32,7 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
               value={toDateInputValue(filters.endDate)}
               min={toDateInputValue(filters.startDate)}
               onChange={(event) => setDateRange(filters.startDate, event.target.value)}
-              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-ink outline-none focus-visible:border-slate-400"
             />
           </label>
           <label className="space-y-2">
@@ -43,7 +43,7 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
                 const value = event.target.value
                 setVoltageLevel(value === 'All' ? 'All' : Number(value))
               }}
-              className="w-full rounded-2xl border border-glassEdge bg-white/70 px-4 py-3 text-small text-ink outline-none"
+              className="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-ink outline-none focus-visible:border-slate-400"
             >
               <option value="All">All levels</option>
               {meta.filters.voltageLevels.map((voltage) => (
@@ -64,8 +64,8 @@ export function FilterBar({ meta }: { meta: MetaSnapshot }) {
               key={state}
               type="button"
               onClick={() => toggleState(state)}
-              className={`rounded-pill px-4 py-2 text-small transition ${
-                active ? 'bg-brand text-white shadow-glass' : 'bg-recessed/70 text-ink hover:bg-white/90'
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition ${
+                active ? 'border-ink bg-ink text-white' : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-50'
               }`}
             >
               {state}
