@@ -55,7 +55,7 @@ export function GlassTooltip({ active, payload, label, unit = '', labelFormatter
   const renderedLabel = labelFormatter ? labelFormatter(label) : (label ?? '')
 
   return (
-    <div className="rounded-card border border-glassEdge bg-panel/80 px-3 py-2 text-small text-ink shadow-glass backdrop-blur-glass">
+    <div className="rounded-card border border-slate-200 bg-white px-3 py-2 text-small text-ink shadow-sm">
       {renderedLabel !== '' && (
         <p className="mb-1 font-mono text-eyebrow uppercase text-muted">{String(renderedLabel)}</p>
       )}

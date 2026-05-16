@@ -1,4 +1,4 @@
-import { Badge } from '@tremor/react'
+
 import { Activity, BrainCircuit, Satellite, Waves, Zap } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 
@@ -24,9 +24,9 @@ export function Sidebar({ meta, className = '', onNavigate }: SidebarProps) {
   return (
     <aside
       aria-label="Primary navigation"
-      className={`flex w-full max-w-[290px] flex-col gap-6 rounded-rail border border-glassEdge bg-panel/70 p-6 shadow-glass backdrop-blur-glass ${className}`}
+      className={`flex w-full max-w-[290px] flex-col gap-6 rounded-rail border border-slate-200 bg-white p-6 shadow-sm ${className}`}
     >
-      <div className="rounded-[26px] bg-grid p-5 shadow-insetSoft">
+      <div className="rounded-[26px] border border-slate-100 bg-slate-50 p-5">
         <div className="flex items-center gap-3">
           <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand text-white shadow-glass">
             <Waves className="h-6 w-6" />
@@ -51,8 +51,8 @@ export function Sidebar({ meta, className = '', onNavigate }: SidebarProps) {
             className={({ isActive }) =>
               `flex items-center justify-between rounded-2xl px-4 py-3 transition ${
                 isActive
-                  ? 'bg-brand text-white shadow-glass'
-                  : 'bg-recessed/50 text-ink hover:bg-white/70'
+                  ? 'bg-ink text-white shadow-sm'
+                  : 'bg-slate-50 text-ink hover:bg-slate-100'
               }`
             }
           >
@@ -65,7 +65,7 @@ export function Sidebar({ meta, className = '', onNavigate }: SidebarProps) {
         ))}
       </nav>
 
-      <div className="rounded-card bg-recessed/70 p-5 shadow-insetSoft">
+      <div className="rounded-card border border-slate-100 bg-slate-50 p-5">
         <p className="font-mono text-eyebrow uppercase text-muted">Situation Board</p>
         <div className="mt-4 space-y-3 text-small text-ink">
           <div className="flex items-center justify-between">
@@ -80,10 +80,6 @@ export function Sidebar({ meta, className = '', onNavigate }: SidebarProps) {
             <span>High-Risk Corridors</span>
             <strong>{meta.overview.highRiskCorridors}</strong>
           </div>
-        </div>
-        <div className="mt-4 flex flex-wrap gap-2">
-          <Badge className="border-0 bg-orange-100 px-3 py-1 text-orange-700">{meta.app.llm}</Badge>
-          <Badge className="border-0 bg-sky-100 px-3 py-1 text-sky-700">{meta.app.database}</Badge>
         </div>
       </div>
     </aside>

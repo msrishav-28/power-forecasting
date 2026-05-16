@@ -16,7 +16,7 @@ interface SectionCardProps extends PropsWithChildren {
 export function SectionCard({ title, eyebrow, action, className, children }: SectionCardProps) {
   return (
     <Card
-      className={`relative rounded-panel border border-glassEdge bg-panel/70 p-pane shadow-glass backdrop-blur-glass ${
+      className={`rounded-panel border border-slate-200 bg-white p-pane shadow-sm ${
         className || ''
       }`}
     >

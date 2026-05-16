@@ -118,44 +118,36 @@ export function AssetsPage() {
 
         <BentoCell colSpan={{ base: 1, lg: 8, xl: 6 }}>
           <SectionCard title={`${selectedAsset.assetId} asset profile`} eyebrow="Transformer focus">
-            <div className="grid gap-5 xl:grid-cols-[1.25fr,0.9fr]">
-              <div className="rounded-[26px] bg-grid p-5 shadow-insetSoft">
+            <div className="grid gap-5">
+              <div className="rounded-[26px] border border-slate-100 bg-slate-50 p-5">
                 <p className="font-mono text-eyebrow uppercase text-muted">Health Trend</p>
                 <div className="mt-4 h-[320px]">
                   <ResponsiveContainer width="100%" height="100%">
                     <LineChart data={healthHistory}>
-                      <ChartGradients />
-                      <CartesianGrid {...chartGrid} />
+                      <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#e2e8f0" />
                       <XAxis dataKey="date" {...chartAxis} />
                       <YAxis domain={[20, 100]} {...chartAxis} />
                       <Tooltip content={<GlassTooltip />} />
-                      <Line type="monotone" dataKey="value" stroke={chartPalette.secondary} strokeWidth={2.5} dot={false} />
+                      <Line type="monotone" dataKey="value" stroke="#0ea5e9" strokeWidth={2.5} dot={false} />
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
               </div>
-              <div className="overflow-hidden rounded-[26px]">
-                <img
-                  src="https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1200&q=80"
-                  alt="Electrical transformer and substation equipment"
-                  className="h-full min-h-[320px] w-full object-cover"
-                />
-              </div>
             </div>
             <div className="mt-5 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+              <div className="rounded-card border border-slate-100 bg-slate-50 p-4">
                 <p className="text-small text-muted">Substation</p>
                 <p className="mt-2 font-semibold text-ink">{selectedAsset.substation}</p>
               </div>
-              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+              <div className="rounded-card border border-slate-100 bg-slate-50 p-4">
                 <p className="text-small text-muted">Manufacturer</p>
                 <p className="mt-2 font-semibold text-ink">{selectedAsset.manufacturer}</p>
               </div>
-              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+              <div className="rounded-card border border-slate-100 bg-slate-50 p-4">
                 <p className="text-small text-muted">Capacity</p>
                 <p className="mt-2 font-semibold text-ink">{selectedAsset.capacityMva} MVA</p>
               </div>
-              <div className="rounded-card bg-recessed/70 p-4 shadow-insetSoft">
+              <div className="rounded-card border border-slate-100 bg-slate-50 p-4">
                 <p className="text-small text-muted">Status</p>
                 <p className={`mt-2 inline-flex rounded-pill px-3 py-1 text-small font-semibold ${riskTone(selectedAsset.status)}`}>
                   {selectedAsset.status}

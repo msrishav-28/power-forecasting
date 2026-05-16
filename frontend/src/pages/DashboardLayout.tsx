@@ -22,7 +22,7 @@ export function DashboardLayout() {
   if (metaQuery.isLoading || !metaQuery.data) {
     return (
       <div className="grid min-h-screen place-items-center px-6">
-        <div className="rounded-panel border border-glassEdge bg-panel/70 px-8 py-6 text-center shadow-glass backdrop-blur-glass">
+        <div className="rounded-panel border border-slate-200 bg-white px-8 py-6 text-center shadow-sm">
           <p className="font-mono text-eyebrow uppercase text-muted">Booting Dashboard</p>
           <h1 className="mt-3 text-h2 font-semibold text-ink">Loading snapshot contracts...</h1>
         </div>

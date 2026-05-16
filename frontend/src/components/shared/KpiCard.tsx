@@ -21,8 +21,7 @@ export function KpiCard({ label, value, delta, tone = 'default' }: KpiCardProps)
         : 'bg-slate-100 text-slate-700'
 
   return (
-    <Card className="group relative overflow-hidden rounded-card border border-glassEdge bg-panel/70 p-pane shadow-glass backdrop-blur-glass transition hover:-translate-y-0.5 hover:shadow-cardHover">
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-16 bg-kpi-sheen" />
+    <Card className="group relative overflow-hidden rounded-card border border-slate-200 bg-white p-pane shadow-sm transition hover:border-slate-300">
       <div className="relative">
         <Text className="font-mono text-eyebrow uppercase text-muted">{label}</Text>
         <Metric className="mt-3 text-metric text-ink">{value}</Metric>

@@ -33,9 +33,9 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
         models for the selected asset.
       </p>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
+      <div className="mt-5 flex flex-col gap-3">
         <Button
-          className="rounded-2xl border-0 bg-brand px-4 py-3 text-white shadow-glass hover:opacity-90"
+          className="rounded-2xl border border-slate-200 bg-ink px-4 py-3 text-white shadow-sm hover:bg-slate-800"
           loading={rulMutation.isPending}
           icon={Gauge}
           onClick={() => rulMutation.mutate()}
@@ -43,7 +43,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
           Refresh RUL
         </Button>
         <Button
-          className="rounded-2xl border-0 bg-signal px-4 py-3 text-white hover:bg-signalDeep"
+          className="rounded-2xl border border-slate-200 bg-red-600 px-4 py-3 text-white hover:bg-red-700"
           loading={anomalyMutation.isPending}
           icon={Activity}
           onClick={() => anomalyMutation.mutate()}
@@ -53,7 +53,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
       </div>
 
       <div className="mt-5 space-y-4">
-        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {rulMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -82,7 +82,7 @@ export function LiveAssetModelPanel({ asset }: { asset: AssetCard }) {
           )}
         </div>
 
-        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {anomalyMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />

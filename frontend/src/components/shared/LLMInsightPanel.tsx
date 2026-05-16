@@ -54,7 +54,7 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
           type="button"
           onClick={() => insightMutation.mutate()}
           disabled={insightMutation.isPending}
-          className="mt-5 inline-flex items-center gap-2 rounded-2xl bg-brand px-4 py-3 text-small font-medium text-white shadow-glass transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-2xl bg-ink px-4 py-3 text-small font-medium text-white shadow-sm transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {insightMutation.isPending ? (
             <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden />
@@ -63,7 +63,7 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
           )}
           Generate operator brief
         </button>
-        <div className="mt-5 rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="mt-5 rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {insightMutation.isPending ? (
             <div className="flex items-center gap-3 text-small text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden />
@@ -87,7 +87,7 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
       </div>
 
       {/* Hairline divider */}
-      <div className="my-6 border-t border-glassDeep" aria-hidden />
+      <div className="my-6 border-t border-slate-200" aria-hidden />
 
       {/* Block 2 — Document Q&A */}
       <div>
@@ -97,13 +97,13 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
           value={question}
           onChange={(event) => setQuestion(event.target.value)}
           placeholder="Ask about a POWERGRID report, operating pattern, or maintenance guidance..."
-          className="mt-3 min-h-[140px] w-full rounded-card border border-glassEdge bg-white/75 p-4 text-small text-ink outline-none focus-visible:border-brandIndigo"
+          className="mt-3 min-h-[140px] w-full rounded-card border border-slate-200 bg-white p-4 text-small text-ink outline-none focus-visible:border-slate-400"
         />
         <button
           type="button"
           onClick={() => ragMutation.mutate()}
           disabled={ragMutation.isPending || !question.trim()}
-          className="mt-4 inline-flex items-center gap-2 rounded-2xl bg-signal px-4 py-3 text-small font-medium text-white shadow-glass transition hover:bg-signalDeep disabled:cursor-not-allowed disabled:opacity-60"
+          className="mt-4 inline-flex flex-wrap items-center gap-2 rounded-2xl bg-red-600 px-4 py-3 text-small font-medium text-white shadow-sm transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-60"
         >
           {ragMutation.isPending ? (
             <LoaderCircle className="h-4 w-4 animate-spin" aria-hidden />
@@ -112,7 +112,7 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
           )}
           Search indexed documents
         </button>
-        <div className="mt-5 rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="mt-5 rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {ragMutation.data ? (
             <div className="space-y-4">
               <p className="text-small leading-7 text-ink">{ragMutation.data.answer}</p>
@@ -120,7 +120,7 @@ export function LLMInsightPanel({ scope, title, context, prompt }: LlmInsightPan
                 <div className="space-y-2">
                   <p className="font-mono text-eyebrow uppercase text-muted">Citations</p>
                   {ragMutation.data.citations.map((citation, index) => (
-                    <div key={`${citation.title}-${index}`} className="rounded-chip bg-white/80 p-3 text-small text-ink">
+                    <div key={`${citation.title}-${index}`} className="rounded-chip border border-slate-200 bg-white p-3 text-small text-ink">
                       <div className="font-medium">{citation.title}</div>
                       <div className="mt-1 text-eyebrow font-mono uppercase text-muted">
                         {citation.source || 'Local indexed document'}

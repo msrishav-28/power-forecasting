@@ -53,9 +53,9 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
         chosen line conditions.
       </p>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-2">
+      <div className="mt-5 flex flex-col gap-3">
         <Button
-          className="rounded-2xl border-0 bg-brand px-4 py-3 text-white shadow-glass hover:opacity-90"
+          className="rounded-2xl border border-slate-200 bg-ink px-4 py-3 text-white shadow-sm hover:bg-slate-800"
           loading={forecastMutation.isPending}
           icon={Radar}
           onClick={() => forecastMutation.mutate()}
@@ -63,7 +63,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
           Refresh 7-day forecast
         </Button>
         <Button
-          className="rounded-2xl border-0 bg-signal px-4 py-3 text-white hover:bg-signalDeep"
+          className="rounded-2xl border border-slate-200 bg-red-600 px-4 py-3 text-white hover:bg-red-700"
           loading={outageMutation.isPending}
           icon={AlertTriangle}
           onClick={() => outageMutation.mutate()}
@@ -72,7 +72,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
         </Button>
       </div>
 
-      <div className="mt-5 grid gap-3 md:grid-cols-3">
+      <div className="mt-5 flex flex-col gap-3">
         <label className="space-y-2">
           <span className="text-sm font-medium text-ink">Scenario load %</span>
           <input
@@ -81,7 +81,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
             max={130}
             value={loadPct}
             onChange={(event) => setLoadPct(Number(event.target.value))}
-            className="w-full rounded-2xl border border-glassEdge bg-white/75 px-4 py-3 text-sm text-ink outline-none"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none"
           />
         </label>
         <label className="space-y-2">
@@ -92,7 +92,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
             max={60}
             value={lineAgeYears}
             onChange={(event) => setLineAgeYears(Number(event.target.value))}
-            className="w-full rounded-2xl border border-glassEdge bg-white/75 px-4 py-3 text-sm text-ink outline-none"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none"
           />
         </label>
         <label className="space-y-2">
@@ -100,7 +100,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
           <select
             value={voltageKv}
             onChange={(event) => setVoltageKv(Number(event.target.value))}
-            className="w-full rounded-2xl border border-glassEdge bg-white/75 px-4 py-3 text-sm text-ink outline-none"
+            className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm text-ink outline-none"
           >
             {[220, 400, 765].map((value) => (
               <option key={value} value={value}>
@@ -112,7 +112,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
       </div>
 
       <div className="mt-5 space-y-4">
-        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {forecastMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />
@@ -143,7 +143,7 @@ export function LiveGridModelPanel({ grid }: { grid: GridSnapshot }) {
           )}
         </div>
 
-        <div className="rounded-card border border-glassEdge bg-recessed/60 p-4 shadow-insetSoft">
+        <div className="rounded-card border border-slate-100 bg-slate-50 p-4 shadow-sm">
           {outageMutation.isPending ? (
             <div className="flex items-center gap-3 text-sm text-muted">
               <LoaderCircle className="h-4 w-4 animate-spin" />
